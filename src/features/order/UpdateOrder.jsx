@@ -14,10 +14,9 @@ function UpdateOrder({ order }) {
 
 export default UpdateOrder
 
-export async function action({ request, parmas }) {
+export async function action({ request, params }) {
     const data = { priority: true };
-    await updateOrder(parmas.orderId, data)
-    // console.log(data);
+    await updateOrder(params.orderId, data)
     return null;
     // return updated order data
 }
