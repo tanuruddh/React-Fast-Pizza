@@ -4,7 +4,7 @@ import MenuItem from "./MenuItem";
 
 function Menu() {
   const data = useLoaderData();
-  console.log(data);
+  console.log("data in menu----", data);
   return <div>
     <h1>Menu</h1>
     <ul className=" divide-y divide-stone-200">
@@ -14,7 +14,8 @@ function Menu() {
 }
 
 export async function loader() {
-  return await getMenu();
+  const data = await getMenu();
+  return data;
 }
 
 export default Menu;

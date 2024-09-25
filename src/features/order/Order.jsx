@@ -14,6 +14,18 @@ import UpdateOrder from "./UpdateOrder.jsx";
 function Order() {
   // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
   const order = useLoaderData();
+  const fetcher = useFetcher();
+
+  useEffect(function () {
+    if (fetcher.state === "idle" && !fetcher.data) {
+      fetcher.load('/menu');
+    } else if (fetcher.state === "loading") {
+      console.log("Loading data...");
+    } else if (fetcher.state === "done") {
+      console.log("Fetch complete:", fetcher.data);
+    }
+  }, [fetcher])
+  console.log("fetcher-----------------------------", fetcher.data, fetcher, fetcher.state)
   const {
     id,
     status,
@@ -24,12 +36,22 @@ function Order() {
     cart,
   } = order;
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
-  const fetcher = useFetcher();
 
-  useEffect(function () {
-    if (!fetcher.data && fetcher.status === "idle")
-      fetcher.load('/menu')
-  }, [fetcher])
+  // useEffect(() => {
+  //   if (!fetcher.data && fetcher.status === "idle") {
+  //     fetcher.load('/menu');
+  //     console.log("fetcher--state---------------------------", fetcher.data, fetcher, fetcher.state)
+  //   }
+  // }, [fetcher]);
+
+  // Separate effect to monitor changes in fetcher.data
+  // useEffect(() => {
+  //   if (fetcher.data) {
+  //     console.log("fetcher-----------------------------", fetcher.data, fetcher, fetcher.state)
+
+  //   }
+  // }, [fetcher.data, fetcher.state]);
+
 
   return (
     <div className="space-y-8 px-4 py-6">

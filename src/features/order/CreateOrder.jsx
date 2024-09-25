@@ -46,7 +46,7 @@ function CreateOrder() {
   // const cart = fakeCart;
   const formError = useActionData();
   const {
-    userName,
+    username,
     status: addressStatus,
     position,
     address,
@@ -68,7 +68,7 @@ function CreateOrder() {
       <Form method="POST">
         <div className=" mb-5 flex gap-2 flex-col sm:flex-row sm:items-center">
           <label className=" sm:basis-40">First Name</label>
-          <input type="text" name="customer" required className="input grow" defaultValue={userName} />
+          <input type="text" name="customer" required className="input grow" defaultValue={username} />
         </div>
 
         <div className=" mb-5 flex gap-2 flex-col sm:flex-row sm:items-center">
@@ -129,7 +129,7 @@ function CreateOrder() {
 export async function action({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  console.log(data);
+  console.log("data in createOrder------------------", data);
   const order = {
     ...data,
     cart: JSON.parse(data.cart),

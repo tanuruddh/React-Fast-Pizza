@@ -6,7 +6,7 @@ import Loader from "./Loader.jsx";
 function AppLayout() {
     const navigation = useNavigation();
     const isLoading = navigation.state === "loading";
-    console.log(navigation.state)
+    console.log("navigation.state in applayout--------------------", navigation.state)
     return (
         <div className="grid h-screen grid-rows-[auto_1fr_auto]">
             {isLoading && <Loader />}
